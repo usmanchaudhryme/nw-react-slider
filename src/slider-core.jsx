@@ -17,7 +17,8 @@ module.exports = React.createClass({
     onChange: React.PropTypes.func,
     onDragStart: React.PropTypes.func,
     onDragEnd: React.PropTypes.func,
-    markerLabel: React.PropTypes.array
+    markerLabel: React.PropTypes.array,
+    color: React.PropTypes.color
   },
 
   getDefaultProps: function () {
@@ -264,7 +265,7 @@ module.exports = React.createClass({
     return (
       <div ref='slider' className='slider'>
         { draggable }
-        <div ref='track' className='slider__track' onClick={ this.clickOnTrack }>
+        <div ref='track' className='slider__track' onClick={ this.clickOnTrack } style={{background: this.props.color}}>
           { this.renderTicks() }
           { this.renderMarkers() }
         </div>

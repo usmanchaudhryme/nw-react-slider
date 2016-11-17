@@ -77,7 +77,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Popover = __webpack_require__(7);
 	var Slider = __webpack_require__(10);
 	var isFunction = __webpack_require__(11);
-	var classnames = __webpack_require__(22);
+	var classnames = __webpack_require__(26);
 	var isUndefined = __webpack_require__(9);
 
 	module.exports = React.createClass({
@@ -301,9 +301,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React = __webpack_require__(6);
 	var ReactDOM = __webpack_require__(8);
 	var isFunction = __webpack_require__(11);
-	var Draggable = __webpack_require__(13);
+	var Draggable = __webpack_require__(19);
 	var isUndefined = __webpack_require__(9);
-	var throttle = __webpack_require__(14);
+	var throttle = __webpack_require__(20);
 
 	module.exports = React.createClass({
 	  displayName: 'core-slider',
@@ -457,11 +457,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  triggerOnChange: function triggerOnChange(pos) {
-	    var _updateValueFromPosit = this.updateValueFromPosition(pos);
-
-	    var value = _updateValueFromPosit.value;
-	    var position = _updateValueFromPosit.position;
-
+	    var _updateValueFromPosit = this.updateValueFromPosition(pos),
+	        value = _updateValueFromPosit.value,
+	        position = _updateValueFromPosit.position;
 
 	    if (isFunction(this.props.onChange)) {
 	      this.props.onChange(value, position);
@@ -476,10 +474,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  handleUp: function handleUp(event, ui) {
 	    var pos = this.refs.drag.state.clientX || 0;
 
-	    var _updateValueFromPosit2 = this.updateValueFromPosition(pos);
-
-	    var position = _updateValueFromPosit2.position;
+	    var _updateValueFromPosit2 = this.updateValueFromPosition(pos),
+	        position = _updateValueFromPosit2.position;
 	    // Do we have a drag end hook ?
+
 
 	    if (isFunction(this.props.onDragEnd)) {
 	      this.props.onDragEnd(position);
@@ -534,10 +532,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  renderMarkers: function renderMarkers() {
 	    if (!this.props.markerLabel) return React.createElement('span', null);
 	    var elements = [];
-	    var _props = this.props;
-	    var min = _props.min;
-	    var max = _props.max;
-	    var markers = _props.markerLabel;
+	    var _props = this.props,
+	        min = _props.min,
+	        max = _props.max,
+	        markers = _props.markerLabel;
 
 	    var percentStep = 100 / (max - min);
 	    for (var i in markers) {
@@ -615,22 +613,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(12);
+	var baseGetTag = __webpack_require__(12),
+	    isObject = __webpack_require__(18);
 
 	/** `Object#toString` result references. */
-	var funcTag = '[object Function]',
+	var asyncTag = '[object AsyncFunction]',
+	    funcTag = '[object Function]',
 	    genTag = '[object GeneratorFunction]',
 	    proxyTag = '[object Proxy]';
-
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objectToString = objectProto.toString;
 
 	/**
 	 * Checks if `value` is classified as a `Function` object.
@@ -650,10 +640,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * // => false
 	 */
 	function isFunction(value) {
+	  if (!isObject(value)) {
+	    return false;
+	  }
 	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in Safari 8-9 which returns 'object' for typed array and other constructors.
-	  var tag = isObject(value) ? objectToString.call(value) : '';
-	  return tag == funcTag || tag == genTag || tag == proxyTag;
+	  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+	  var tag = baseGetTag(value);
+	  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
 	}
 
 	module.exports = isFunction;
@@ -661,6 +654,159 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Symbol = __webpack_require__(13),
+	    getRawTag = __webpack_require__(16),
+	    objectToString = __webpack_require__(17);
+
+	/** `Object#toString` result references. */
+	var nullTag = '[object Null]',
+	    undefinedTag = '[object Undefined]';
+
+	/** Built-in value references. */
+	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+	/**
+	 * The base implementation of `getTag` without fallbacks for buggy environments.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {string} Returns the `toStringTag`.
+	 */
+	function baseGetTag(value) {
+	  if (value == null) {
+	    return value === undefined ? undefinedTag : nullTag;
+	  }
+	  value = Object(value);
+	  return (symToStringTag && symToStringTag in value)
+	    ? getRawTag(value)
+	    : objectToString(value);
+	}
+
+	module.exports = baseGetTag;
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var root = __webpack_require__(14);
+
+	/** Built-in value references. */
+	var Symbol = root.Symbol;
+
+	module.exports = Symbol;
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var freeGlobal = __webpack_require__(15);
+
+	/** Detect free variable `self`. */
+	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+	/** Used as a reference to the global object. */
+	var root = freeGlobal || freeSelf || Function('return this')();
+
+	module.exports = root;
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+	var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+	module.exports = freeGlobal;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Symbol = __webpack_require__(13);
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var nativeObjectToString = objectProto.toString;
+
+	/** Built-in value references. */
+	var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+	/**
+	 * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {string} Returns the raw `toStringTag`.
+	 */
+	function getRawTag(value) {
+	  var isOwn = hasOwnProperty.call(value, symToStringTag),
+	      tag = value[symToStringTag];
+
+	  try {
+	    value[symToStringTag] = undefined;
+	    var unmasked = true;
+	  } catch (e) {}
+
+	  var result = nativeObjectToString.call(value);
+	  if (unmasked) {
+	    if (isOwn) {
+	      value[symToStringTag] = tag;
+	    } else {
+	      delete value[symToStringTag];
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = getRawTag;
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var nativeObjectToString = objectProto.toString;
+
+	/**
+	 * Converts `value` to a string using `Object.prototype.toString`.
+	 *
+	 * @private
+	 * @param {*} value The value to convert.
+	 * @returns {string} Returns the converted string.
+	 */
+	function objectToString(value) {
+	  return nativeObjectToString.call(value);
+	}
+
+	module.exports = objectToString;
+
+
+/***/ },
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -697,7 +843,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -2067,11 +2213,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=react-draggable.js.map
 
 /***/ },
-/* 14 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var debounce = __webpack_require__(15),
-	    isObject = __webpack_require__(12);
+	var debounce = __webpack_require__(21),
+	    isObject = __webpack_require__(18);
 
 	/** Error message constants. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -2142,12 +2288,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(12),
-	    now = __webpack_require__(16),
-	    toNumber = __webpack_require__(19);
+	var isObject = __webpack_require__(18),
+	    now = __webpack_require__(22),
+	    toNumber = __webpack_require__(23);
 
 	/** Error message constants. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -2336,10 +2482,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(17);
+	var root = __webpack_require__(14);
 
 	/**
 	 * Gets the timestamp of the number of milliseconds that have elapsed since
@@ -2365,37 +2511,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 17 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var freeGlobal = __webpack_require__(18);
-
-	/** Detect free variable `self`. */
-	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-
-	/** Used as a reference to the global object. */
-	var root = freeGlobal || freeSelf || Function('return this')();
-
-	module.exports = root;
-
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
-	var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
-
-	module.exports = freeGlobal;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isObject = __webpack_require__(12),
-	    isSymbol = __webpack_require__(20);
+	var isObject = __webpack_require__(18),
+	    isSymbol = __webpack_require__(24);
 
 	/** Used as references for various `Number` constants. */
 	var NAN = 0 / 0;
@@ -2463,23 +2583,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 20 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(21);
+	var baseGetTag = __webpack_require__(12),
+	    isObjectLike = __webpack_require__(25);
 
 	/** `Object#toString` result references. */
 	var symbolTag = '[object Symbol]';
-
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objectToString = objectProto.toString;
 
 	/**
 	 * Checks if `value` is classified as a `Symbol` primitive or object.
@@ -2500,14 +2611,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function isSymbol(value) {
 	  return typeof value == 'symbol' ||
-	    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+	    (isObjectLike(value) && baseGetTag(value) == symbolTag);
 	}
 
 	module.exports = isSymbol;
 
 
 /***/ },
-/* 21 */
+/* 25 */
 /***/ function(module, exports) {
 
 	/**
@@ -2542,7 +2653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 22 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!

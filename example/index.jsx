@@ -103,7 +103,7 @@ var Index = React.createClass({
                 <label className='prop-text__label'>Sigal while dragging</label>
                 <p className='prop-text__value'>{this.state.triggerOnChangeWhileDragging === 1 ? 'True' : 'False'}</p>
               </div>
-              <Slider min={0} max={1} value={this.state.triggerOnChangeWhileDragging} onChange={this.updateBool('triggerOnChangeWhileDragging')} />
+              <Slider min={0} max={1} color="#f00" value={this.state.triggerOnChangeWhileDragging} onChange={this.updateBool('triggerOnChangeWhileDragging')} />
             </li>
             <li className='proplist__item'>
               <div className='prop-text'>
