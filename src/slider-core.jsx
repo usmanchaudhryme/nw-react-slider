@@ -18,7 +18,7 @@ module.exports = React.createClass({
     onDragStart: React.PropTypes.func,
     onDragEnd: React.PropTypes.func,
     markerLabel: React.PropTypes.array,
-    color: React.PropTypes.color
+    color: React.PropTypes.string
   },
 
   getDefaultProps: function () {
