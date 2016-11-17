@@ -63,6 +63,7 @@ module.exports = React.createClass({
           ticks={this.props.ticks}
           markerLabel={this.props.markerLabel} 
           color={this.props.color}
+          
           />
         {follower}
       </div>

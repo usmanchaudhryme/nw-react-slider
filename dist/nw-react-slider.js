@@ -92,7 +92,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onDragEnd: React.PropTypes.func,
 	    triggerOnChangeWhileDragging: React.PropTypes.bool,
 	    markerLabel: React.PropTypes.array,
-	    displayFollowerPopover: React.PropTypes.bool
+	    displayFollowerPopover: React.PropTypes.bool,
+	    color: React.PropTypes.string
 	  },
 
 	  getInitialState: function getInitialState() {
@@ -134,7 +135,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onDragEnd: this.props.onDragEnd,
 	        triggerOnChangeWhileDragging: this.props.triggerOnChangeWhileDragging,
 	        ticks: this.props.ticks,
-	        markerLabel: this.props.markerLabel }),
+	        markerLabel: this.props.markerLabel,
+	        color: this.props.color
+
+	      }),
 	      follower
 	    );
 	  }
@@ -317,7 +321,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onChange: React.PropTypes.func,
 	    onDragStart: React.PropTypes.func,
 	    onDragEnd: React.PropTypes.func,
-	    markerLabel: React.PropTypes.array
+	    markerLabel: React.PropTypes.array,
+	    color: React.PropTypes.string
 	  },
 
 	  getDefaultProps: function getDefaultProps() {
@@ -601,7 +606,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      draggable,
 	      React.createElement(
 	        'div',
-	        { ref: 'track', className: 'slider__track', onClick: this.clickOnTrack },
+	        { ref: 'track', className: 'slider__track', onClick: this.clickOnTrack, style: { background: this.props.color } },
 	        this.renderTicks(),
 	        this.renderMarkers()
 	      )
