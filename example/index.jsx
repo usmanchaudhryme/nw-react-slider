@@ -93,6 +93,7 @@ var Index = React.createClass({
       }
       markersText += markers[i].value + ' : \"' + markers[i].label + '\"'
     }
+    console.log (this.props);
     return (
       <div className='slider-demo'>
         <div className='controls'>
@@ -155,6 +156,7 @@ var Index = React.createClass({
               onChange={this.handleSliderChange}
               ticks={this.state.ticks === 1}
               triggerOnChangeWhileDragging={this.state.triggerOnChangeWhileDragging === 1}
+              color={this.props.config.value==1?"#aba":"#eee"}
               markerLabel={markers}/>
           </div>
           <div className='jsx'>

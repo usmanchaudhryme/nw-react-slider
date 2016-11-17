@@ -331,7 +331,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      min: 0,
 	      max: 10,
 	      ticks: false,
-	      triggerOnChangeWhileDragging: true
+	      triggerOnChangeWhileDragging: true,
+	      color: "#FFBA00"
 	    };
 	  },
 
@@ -591,12 +592,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        start: { x: this.state.position, y: 0 },
 	        onStop: this.handleUp,
 	        onStart: this.handleDown,
-	        onDrag: this.dragging
+	        onDrag: this.dragging,
+	        color: this.props.color
 	      };
 	      draggable = React.createElement(
 	        Draggable,
 	        _extends({ ref: 'drag', key: 'draggable' }, draggableProps),
-	        React.createElement('span', { ref: 'handle', className: 'slider__handle' })
+	        React.createElement(
+	          'span',
+	          { ref: 'handle', className: 'slider__handle', style: { borderBottomColor: this.props.color } },
+	          React.createElement('span', { className: 'slider__handle_after', style: { borderTopColor: this.props.color } })
+	        )
 	      );
 	    }
 

@@ -11,38 +11,41 @@
 }
 .slider-container-component .slider__track {
   position: relative;
-  height: 12px;
+  height: 2px;
   cursor: pointer;
-  background: -webkit-linear-gradient(left, #F660FF, #65BAFA, #8FEC51);
-  background: linear-gradient(to right, #F660FF, #65BAFA, #8FEC51);
+  background: #FFBA00;
   border-radius: 6px;
-  margin: 6px 12px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+  margin: 0px;
 }
 .slider-container-component .slider__handle {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border: 1px solid #bcbcbc;
-  height: 24px;
-  width: 24px;
-  border-radius: 12px;
-  background: #ffffff;
-  cursor: pointer;
-  box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.15);
-  margin-top: -6px;
+  width: 0;
+  height: 0;
+  border: 16px solid rgba(0, 0, 0, 0);
+  border-bottom-color: #F6A623;
+  position: relative;
+  top: 5px;
+  border-radius: 0px;
+  box-shadow: none;
+  margin-top: 0px;
   display: inline-block;
-  position: absolute;
+  background: #fff;
+  cursor: pointer;
   z-index: 1;
-  -webkit-transition: -webkit-transform .2s ease;
-  transition: -webkit-transform .2s ease;
-  transition: transform .2s ease;
-  transition: transform .2s ease, -webkit-transform .2s ease;
+  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
 }
 .slider-container-component .slider__handle.react-draggable-dragging {
   -webkit-transition: none;
   transition: none;
+}
+.slider-container-component .slider__handle_after {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 16px;
+  width: 0;
+  height: 0;
+  border: 16px solid rgba(0, 0, 0, 0);
+  border-top-color: #F6A623;
 }
 .slider-container-component .slider__ticks,
 .slider-container-component .slider__markers {

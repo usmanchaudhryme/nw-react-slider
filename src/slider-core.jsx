@@ -27,7 +27,8 @@ module.exports = React.createClass({
       min: 0,
       max: 10,
       ticks: false,
-      triggerOnChangeWhileDragging: true
+      triggerOnChangeWhileDragging: true,
+      color: "#FFBA00"
     }
   },
 
@@ -253,11 +254,14 @@ module.exports = React.createClass({
         start: {x: this.state.position, y: 0},
         onStop: this.handleUp,
         onStart: this.handleDown,
-        onDrag: this.dragging
+        onDrag: this.dragging,
+        color: this.props.color
       }
       draggable = (
         <Draggable ref='drag' key='draggable' { ...draggableProps }>
-          <span ref='handle' className='slider__handle'/>
+          <span ref='handle' className='slider__handle' style={{borderBottomColor: this.props.color}}>
+            <span className='slider__handle_after' style={{borderTopColor: this.props.color}} />
+          </span>
         </Draggable>
       )
     }
