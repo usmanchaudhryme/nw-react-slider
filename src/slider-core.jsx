@@ -259,9 +259,7 @@ module.exports = React.createClass({
       }
       draggable = (
         <Draggable ref='drag' key='draggable' { ...draggableProps }>
-          <span ref='handle' className='slider__handle' style={{borderBottomColor: this.props.color}}>
-            <span className='slider__handle_after' style={{borderTopColor: this.props.color}} />
-          </span>
+          <span ref='handle' className='slider__handle' style={{borderBottomColor: this.props.color, borderTopColor: this.props.color, borderTopStyle: 'none'}} />
         </Draggable>
       )
     }

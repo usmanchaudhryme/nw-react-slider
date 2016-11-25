@@ -598,11 +598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      draggable = React.createElement(
 	        Draggable,
 	        _extends({ ref: 'drag', key: 'draggable' }, draggableProps),
-	        React.createElement(
-	          'span',
-	          { ref: 'handle', className: 'slider__handle', style: { borderBottomColor: this.props.color } },
-	          React.createElement('span', { className: 'slider__handle_after', style: { borderTopColor: this.props.color } })
-	        )
+	        React.createElement('span', { ref: 'handle', className: 'slider__handle', style: { borderBottomColor: this.props.color, borderTopColor: this.props.color, borderTopStyle: 'none' } })
 	      );
 	    }
 

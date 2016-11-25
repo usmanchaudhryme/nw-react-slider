@@ -33,11 +33,7 @@
   z-index: 1;
   transition: transform 0.2s ease, -webkit-transform 0.2s ease;
 }
-.slider-container-component .slider__handle.react-draggable-dragging {
-  -webkit-transition: none;
-  transition: none;
-}
-.slider-container-component .slider__handle_after {
+.slider-container-component .slider__handle:after {
   content: "";
   position: absolute;
   left: -16px;
@@ -45,7 +41,11 @@
   width: 0;
   height: 0;
   border: 16px solid rgba(0, 0, 0, 0);
-  border-top-color: #F6A623;
+  border-top-color: inherit;
+}
+.slider-container-component .slider__handle.react-draggable-dragging {
+  -webkit-transition: none;
+  transition: none;
 }
 .slider-container-component .slider__ticks,
 .slider-container-component .slider__markers {

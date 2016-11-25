@@ -39,10 +39,7 @@
       cursor: pointer;
       z-index: 1;
       transition: transform .2s ease, -webkit-transform .2s ease;
-      &.react-draggable-dragging {
-        transition: none;
-      }
-      &_after{
+      &:after{
         content: "";
         position: absolute;
         left: -16px;
@@ -50,7 +47,10 @@
         width: 0;
         height: 0;
         border: 16px solid rgba(0, 0, 0, 0);
-        border-top-color: #F6A623;
+        border-top-color: inherit;
+      }
+      &.react-draggable-dragging {
+        transition: none;
       }
     }
 
