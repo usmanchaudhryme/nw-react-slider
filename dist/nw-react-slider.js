@@ -598,7 +598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      draggable = React.createElement(
 	        Draggable,
 	        _extends({ ref: 'drag', key: 'draggable' }, draggableProps),
-	        React.createElement('span', { ref: 'handle', className: 'slider__handle', style: { borderBottomColor: this.props.color, borderTopColor: this.props.color, borderTopStyle: 'none' } })
+	        React.createElement('span', { ref: 'handle', className: 'slider__handle', style: { top: '20px', borderBottomColor: this.props.color, borderTopColor: this.props.color, borderTopStyle: 'none' } })
 	      );
 	    }
 
@@ -608,9 +608,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      draggable,
 	      React.createElement(
 	        'div',
-	        { ref: 'track', className: 'slider__track', onClick: this.clickOnTrack, style: { background: this.props.color } },
-	        this.renderTicks(),
-	        this.renderMarkers()
+	        { ref: 'track', className: 'slider__track', style: { height: '30px', background: 'white' }, onClick: this.clickOnTrack },
+	        React.createElement(
+	          'div',
+	          { style: { background: this.props.color, height: '2px', top: '50%', position: 'relative' } },
+	          this.renderTicks(),
+	          this.renderMarkers()
+	        )
 	      )
 	    );
 	  }

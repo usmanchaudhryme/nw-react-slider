@@ -259,7 +259,7 @@ module.exports = React.createClass({
       }
       draggable = (
         <Draggable ref='drag' key='draggable' { ...draggableProps }>
-          <span ref='handle' className='slider__handle' style={{borderBottomColor: this.props.color, borderTopColor: this.props.color, borderTopStyle: 'none'}} />
+          <span ref='handle' className='slider__handle' style={{top: '20px', borderBottomColor: this.props.color, borderTopColor: this.props.color, borderTopStyle: 'none'}} />
         </Draggable>
       )
     }
@@ -267,9 +267,11 @@ module.exports = React.createClass({
     return (
       <div ref='slider' className='slider'>
         { draggable }
-        <div ref='track' className='slider__track' onClick={ this.clickOnTrack } style={{background: this.props.color}}>
-          { this.renderTicks() }
-          { this.renderMarkers() }
+        <div ref='track' className='slider__track' style={{height: '30px', background: 'white'}} onClick={ this.clickOnTrack } >
+          <div style={{background: this.props.color, height: '2px', top: '50%', position: 'relative'}}>
+            { this.renderTicks() }
+            { this.renderMarkers() }
+          </div>
         </div>
       </div>
     )
