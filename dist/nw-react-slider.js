@@ -398,7 +398,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentDidUpdate: function componentDidUpdate() {
 	    // after a render, ensure that draggable is in correct position
-	    this.refs.drag && this.refs.drag.setState({ clientX: this.state.position });
+	    this.refs.drag && this.refs.drag.setState({ clientX: this.state.position - 17 });
 	  },
 
 	  setHandlePosition: function setHandlePosition() {
