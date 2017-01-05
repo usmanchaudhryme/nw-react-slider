@@ -94,7 +94,14 @@ module.exports = React.createClass({
 
   componentDidUpdate: function () {
     // after a render, ensure that draggable is in correct position
-    this.refs.drag && this.refs.drag.setState({clientX: this.state.position-17})
+    var position = 0;
+    if(this.state.position == 0){
+      position = 0;
+    }
+    else{
+      position = this.state.position - 32;
+    }
+    this.refs.drag && this.refs.drag.setState({clientX: position})
   },
 
   setHandlePosition: function (props = this.props, value = this.state.value) {
