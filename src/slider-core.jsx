@@ -9,9 +9,9 @@ module.exports = React.createClass({
   displayName: 'core-slider',
 
   propTypes: {
-    value: React.PropTypes.number,
-    min: React.PropTypes.number,
-    max: React.PropTypes.number,
+    value: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+    min: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+    max: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
     ticks: React.PropTypes.bool,
     triggerOnChangeWhileDragging: React.PropTypes.bool,
     onChange: React.PropTypes.func,
