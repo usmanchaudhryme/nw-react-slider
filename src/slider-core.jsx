@@ -8,18 +8,7 @@ var throttle = require('lodash/throttle')
 module.exports = React.createClass({
   displayName: 'core-slider',
 
-  propTypes: {
-    value: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-    min: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-    max: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-    ticks: React.PropTypes.bool,
-    triggerOnChangeWhileDragging: React.PropTypes.bool,
-    onChange: React.PropTypes.func,
-    onDragStart: React.PropTypes.func,
-    onDragEnd: React.PropTypes.func,
-    markerLabel: React.PropTypes.array,
-    color: React.PropTypes.string
-  },
+ 
 
   getDefaultProps: function () {
     return {
