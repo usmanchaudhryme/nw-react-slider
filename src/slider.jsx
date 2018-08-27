@@ -7,19 +7,6 @@ var isUndefined = require('lodash/isUndefined')
 
 module.exports = React.createClass({
   displayName: 'nw-slider',
-  propTypes: {
-    value: React.PropTypes.number,
-    min: React.PropTypes.number,
-    max: React.PropTypes.number,
-    ticks: React.PropTypes.bool,
-    onChange: React.PropTypes.func,
-    onDragStart: React.PropTypes.func,
-    onDragEnd: React.PropTypes.func,
-    triggerOnChangeWhileDragging: React.PropTypes.bool,
-    markerLabel: React.PropTypes.array,
-    displayFollowerPopover: React.PropTypes.bool,
-    color: React.PropTypes.string
-  },
 
   getInitialState: function () {
     return {
