@@ -1,8 +1,9 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 var isUndefined = require('lodash/isUndefined')
+var createReactClass = require('create-react-class')
 
-module.exports = React.createClass({
+module.exports = createReactClass({
   displayName: 'popover-follow',
 
   getDefaultProps: function () {

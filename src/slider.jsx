@@ -4,8 +4,9 @@ var Slider = require('./slider-core')
 var isFunction = require('lodash/isFunction')
 var classnames = require('classnames')
 var isUndefined = require('lodash/isUndefined')
+var createReactClass = require('create-react-class')
 
-module.exports = React.createClass({
+module.exports = createReactClass({
   displayName: 'nw-slider',
 
   getInitialState: function () {
