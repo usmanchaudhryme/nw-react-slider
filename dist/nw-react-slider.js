@@ -82,19 +82,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = React.createClass({
 	  displayName: 'nw-slider',
-	  propTypes: {
-	    value: React.PropTypes.number,
-	    min: React.PropTypes.number,
-	    max: React.PropTypes.number,
-	    ticks: React.PropTypes.bool,
-	    onChange: React.PropTypes.func,
-	    onDragStart: React.PropTypes.func,
-	    onDragEnd: React.PropTypes.func,
-	    triggerOnChangeWhileDragging: React.PropTypes.bool,
-	    markerLabel: React.PropTypes.array,
-	    displayFollowerPopover: React.PropTypes.bool,
-	    color: React.PropTypes.string
-	  },
 
 	  getInitialState: function getInitialState() {
 	    return {
@@ -162,13 +149,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = React.createClass({
 	  displayName: 'popover-follow',
-
-	  propTypes: {
-	    position: React.PropTypes.number,
-	    value: React.PropTypes.number,
-	    trackWidth: React.PropTypes.number,
-	    handleWidth: React.PropTypes.number
-	  },
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -311,19 +291,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = React.createClass({
 	  displayName: 'core-slider',
-
-	  propTypes: {
-	    value: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-	    min: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-	    max: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
-	    ticks: React.PropTypes.bool,
-	    triggerOnChangeWhileDragging: React.PropTypes.bool,
-	    onChange: React.PropTypes.func,
-	    onDragStart: React.PropTypes.func,
-	    onDragEnd: React.PropTypes.func,
-	    markerLabel: React.PropTypes.array,
-	    color: React.PropTypes.string
-	  },
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
